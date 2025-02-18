@@ -10,7 +10,6 @@ wss.on("connection", ws => {
 
     ws.on("message", data => {
         const messageString = data.toString();
-        console.log(`Client has sent us: ${messageString}`);
 
 
         clients.forEach(client => {
