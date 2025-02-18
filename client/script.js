@@ -1,4 +1,11 @@
 const ws = new WebSocket("ws://localhost:8082");
+let inputMessage = document.getElementById("input-message");
+let sendButton = document.getElementById("submit");
+
+function sendMessage() {
+    console.log(inputMessage.value);
+    inputMessage.value = "";
+}
 
 ws.addEventListener("open", () => {
     console.log("We are connected!");
