@@ -83,7 +83,29 @@ main {
     align-items: center;
 }
 
-textarea {
+#username {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#user-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#username {
+    margin: 1rem;
+    padding: .5rem;
+    width: 20vw;
+    border-radius: 10px;
+}
+
+textarea,
+.username {
     margin: 1rem;
     padding: .5rem;
     width: 20vw;

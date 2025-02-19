@@ -73,6 +73,8 @@ function sendMessage() {
 }
 
 
+
+
 // connection event handlers
 
 // connected to server

@@ -11,28 +11,34 @@
 
 <body>
     <main>
+
         <div id="screen-container">
+
+
             <div id="chat-history">
-                <div class="message-bubble recieved-messages">Hey
-                    <div class="timestamp">2345 26 July</div>
-                </div>
-                <div class="message-bubble sent-messages">Who dis?
-                    <div class="timestamp">2345 26 July</div>
-                </div>
             </div>
 
             <div id="chat-controls">
-                <div class="user-info">
-                    You are chatting with Unknown
+                <div class="username">
+                    <input type="text" id="username" name="username" placeholder="Input username...">
+                    <div class="text-submit">
+                        <button type="submit" id="submit" onclick="sendMessage()">Send</button>
+                    </div>
                 </div>
-                <div class="text-input">
-                    <textarea type="text-area" name="input-message" id="input-message" placeholder="Start chatting..."></textarea>
+                <div id="user-input">
+                    <div class="user-info">
+                        You are chatting with Unknown
+                    </div>
+                    <div class="text-input">
+                        <textarea type="text-area" name="input-message" id="input-message" placeholder="Start chatting..."></textarea>
+                    </div>
+                    <div class="text-submit">
+                        <button type="submit" id="submit" onclick="sendMessage()">Send</button>
+                    </div>
                 </div>
-                <div class="text-submit">
-                    <button type="submit" id="submit" onclick="sendMessage()">Send</button>
-                </div>
-            </div>
 
+
+            </div>
     </main>
     <script src="script.js"></script>
 </body>
