@@ -6,6 +6,13 @@ const screenContainer = document.getElementById("screen-container");
 const chatHistory = document.getElementById("chat-history");
 const chatControls = document.getElementById("chat-controls");
 const usernameContainer = document.getElementById("username");
+const userInfo = document.getElementById("user-info");
+let myUsername;
+let remoteUsername;
+let isLoggedIn = false;
+
+// join the party
+// take username and pass it to remote client
 
 addEventListener("DOMContentLoaded", () => {
     chatHistory.style.display = "none";
@@ -13,14 +20,42 @@ addEventListener("DOMContentLoaded", () => {
     screenContainer.style.justifyContent = "center";
 });
 
+
+// take user name from client
+
 function takeUsername() {
     let usernameInput = document.getElementById("username-input");
-    let username = usernameInput.value;
-    console.log(username);
+    myUsername = usernameInput.value;
+
+    if (myUsername === "") {
+        alert("Please enter a valid username");
+        return;
+    }
+    isLoggedIn = true;
+
+    sendUserNameMessage();
+
+    // update UI
+
+    userInfo.textContent = `Hello ${myUsername}, waiting for someone to join...`;
     usernameContainer.style.display = "none";
     chatHistory.style.display = "flex";
     chatControls.style.display = "flex";
-};
+    // send username to other client
+}
+
+function sendUserNameMessage() {
+    const usernameMessage = {
+        type: 'username',
+        username: myUsername,
+        isAnnouncement: true
+    };
+    ws.send(JSON.stringify(usernameMessage));
+}
+
+
+
+// messenger application
 
 // sending and recieving messages
 
@@ -30,6 +65,34 @@ let sendButton = document.getElementById("submit");
 // handle incoming messages
 
 ws.onmessage = function(event) {
+
+    // handle usernames
+    try {
+        const message = JSON.parse(event.data);
+
+        if (message.type === "username") {
+            remoteUsername = message.username;
+            userInfo.textContent = `Hello ${myUsername}, you are connected with ${remoteUsername}`;
+
+            if (message.isAnnouncement && isLoggedIn) {
+                setTimeout(() => {
+                    const responseMessage = {
+                        type: 'username',
+                        username: myUsername,
+                        isAnnouncement: false
+                    };
+                    ws.send(JSON.stringify(responseMessage));
+                }, 100);
+            }
+            return;
+        }
+
+
+    } catch (error) {
+        console.log("Recieved chat message");
+    }
+
+    // handle chat messages
     const recievedMessage = event.data;
 
     // handle the message bubble
@@ -91,6 +154,7 @@ function sendMessage() {
 
     // clear the user input which each use
     inputMessage.value = "";
+
 }
 
 
