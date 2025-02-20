@@ -1,5 +1,28 @@
 const ws = new WebSocket("ws://localhost:8082");
 
+// take user name on landing
+
+const screenContainer = document.getElementById("screen-container");
+const chatHistory = document.getElementById("chat-history");
+const chatControls = document.getElementById("chat-controls");
+const usernameContainer = document.getElementById("username");
+
+addEventListener("DOMContentLoaded", () => {
+    chatHistory.style.display = "none";
+    chatControls.style.display = "none";
+    screenContainer.style.justifyContent = "center";
+});
+
+function takeUsername() {
+    let usernameInput = document.getElementById("username-input");
+    let username = usernameInput.value;
+    console.log(username);
+    usernameContainer.style.display = "none";
+    chatHistory.style.display = "flex";
+    chatControls.style.display = "flex";
+};
+
+// sending and recieving messages
 
 let inputMessage = document.getElementById("input-message");
 let sendButton = document.getElementById("submit");
@@ -10,7 +33,6 @@ ws.onmessage = function(event) {
     const recievedMessage = event.data;
 
     // handle the message bubble
-    const chatHistory = document.getElementById("chat-history");
     const messageBubble = document.createElement("div");
     messageBubble.className = "message-bubble recieved-messages";
 
@@ -44,7 +66,6 @@ function sendMessage() {
     ws.send(messageText);
 
     // handle the message bubble
-    const chatHistory = document.getElementById("chat-history");
     const messageBubble = document.createElement("div");
     messageBubble.className = "message-bubble sent-messages";
 

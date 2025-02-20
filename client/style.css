@@ -20,7 +20,7 @@ main {
 }
 
 #screen-container {
-    background-color: black;
+    background-color: gray;
     border: 5px solid silver;
     height: 80vh;
     width: 60vw;
@@ -90,6 +90,25 @@ main {
     align-items: center;
 }
 
+.user-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#user-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #user-input {
     display: flex;
     flex-direction: column;
@@ -105,7 +124,7 @@ main {
 }
 
 textarea,
-.username {
+#username-input {
     margin: 1rem;
     padding: .5rem;
     width: 20vw;
@@ -163,7 +182,9 @@ button:hover {
         justify-content: center;
         align-items: center;
     }
-    textarea {
+    textarea,
+    #username {
         width: 60vw;
     }
+    button {}
 }
